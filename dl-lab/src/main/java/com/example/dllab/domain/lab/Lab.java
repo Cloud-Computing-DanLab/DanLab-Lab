@@ -32,5 +32,11 @@ public class Lab {
         this.leader = leader;
         this.contacts = contacts;
     }
+
+    public void updateLab(String name, String info, String contacts) {
+        this.name = name;
+        this.info = info;
+        this.contacts = contacts;
+    }
 }
 

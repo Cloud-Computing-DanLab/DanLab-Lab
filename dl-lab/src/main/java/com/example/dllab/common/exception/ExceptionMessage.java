@@ -10,6 +10,9 @@ public enum ExceptionMessage {
     // LabException
     LAB_NOT_FOUND("연구실 정보를 찾을 수 없습니다."),
 
+    // LabEventException
+    LAB_EVENT_NOT_FOUND("연구실 이벤트 정보를 찾을 수 없습니다."),
+
     ;
     private final String text;
 }

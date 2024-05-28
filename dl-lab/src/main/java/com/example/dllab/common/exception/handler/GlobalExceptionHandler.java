@@ -1,6 +1,6 @@
 package com.example.dllab.common.exception.handler;
 
-import com.example.dlauth.common.response.JsonResult;
+import com.example.dllab.common.response.JsonResult;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;

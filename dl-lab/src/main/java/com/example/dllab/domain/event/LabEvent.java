@@ -54,4 +54,10 @@ public class LabEvent {
         this.category = category;
         this.status = status;
     }
+
+    public void updateLabEvent(String title, String detail, LabEventStatus status) {
+        this.title = title;
+        this.detail = detail;
+        this.status = status;
+    }
 }

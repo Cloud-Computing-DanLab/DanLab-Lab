@@ -16,10 +16,13 @@ public class Lab {
     @Column(name = "NAME", nullable = false)
     private String name;
 
-    @Column(name = "INFO")
+    @Column(name = "INFO", columnDefinition = "TEXT")
     private String info;
 
-    @Column(name = "LEADER", nullable = false)
+    @Column(name = "SITE")
+    private String site;
+
+    @Column(name = "LEADER", nullable = false, unique = true)
     private String leader;
 
     @Column(name = "CONTACTS")

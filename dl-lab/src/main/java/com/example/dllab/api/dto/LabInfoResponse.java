@@ -8,6 +8,8 @@ public record LabInfoResponse(
         Long labId,
         String name,
         String info,
+
+        String site,
         String leader,
         String contacts
 
@@ -17,6 +19,7 @@ public record LabInfoResponse(
                 .labId(lab.getId())
                 .name(lab.getName())
                 .info(lab.getInfo())
+                .site(lab.getSite())
                 .leader(lab.getLeader())
                 .contacts(lab.getContacts())
                 .build();

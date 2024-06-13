@@ -41,13 +41,11 @@ public class LabController {
         return JsonResult.successOf(labPage);
     }
 
-    // Todo: 연구실 프로필 상세 조회
     @GetMapping("/{labId}")
     public JsonResult<?> getLabInfo(@PathVariable(name = "labId") Long labId) {
         return JsonResult.successOf(labService.getLabInfo(labId));
     }
 
-    // Todo: 연구실 프로필 수정
     @PostMapping("/{labId}/update")
     public JsonResult<?> updateLab(@PathVariable(name = "labId") Long labId,
                                    @Valid @RequestBody UpdateLabInfoRequest request) {

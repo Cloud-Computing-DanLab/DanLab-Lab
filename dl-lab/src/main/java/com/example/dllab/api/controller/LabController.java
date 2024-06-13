@@ -1,5 +1,6 @@
 package com.example.dllab.api.controller;
 
+import com.example.dllab.api.dto.CreateLabRequest;
 import com.example.dllab.api.dto.UpdateLabInfoRequest;
 import com.example.dllab.api.service.LabService;
 import com.example.dllab.common.response.JsonResult;
@@ -19,6 +20,13 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class LabController {
     private final LabService labService;
+
+    @PostMapping("/")
+    public JsonResult<?> createLab(@Valid @RequestBody CreateLabRequest request) {
+        labService.createLab(request);
+        return JsonResult.successOf("연구실 프로필 등록이 완료되었습니다.");
+    }
+
     // 연구실 프로필 리스트 조회(검색)
     @GetMapping("/")
     public JsonResult<?> getLabInfoList(

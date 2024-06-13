@@ -6,7 +6,8 @@ import lombok.Builder;
 public record UpdateLabInfoRequest(
         String name,
         String info,
-        String contacts
+        String contacts,
+        String site
 
 ) {
 }

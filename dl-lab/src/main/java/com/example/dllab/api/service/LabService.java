@@ -1,5 +1,6 @@
 package com.example.dllab.api.service;
 
+import com.example.dllab.api.dto.CreateLabRequest;
 import com.example.dllab.api.dto.LabInfoResponse;
 import com.example.dllab.api.dto.UpdateLabInfoRequest;
 import com.example.dllab.common.exception.ExceptionMessage;
@@ -44,12 +45,26 @@ public class LabService {
     }
 
     @Transactional
+    public void createLab(CreateLabRequest request) {
+        labRepository.save(
+                Lab.builder()
+                        .name(request.name())
+                        .leader(request.leader())
+                        .info(request.info())
+                        .contacts(request.contacts())
+                        .site(request.site())
+                        .build()
+        );
+    }
+
+    @Transactional
     public void updateLabInfo(Long labId, UpdateLabInfoRequest request) {
         Lab lab = labRepository.findById(labId).orElseThrow(() -> {
             log.warn("[DL WARN]: {} : {}", ExceptionMessage.LAB_NOT_FOUND.getText(), labId);
             throw new LabException(ExceptionMessage.LAB_NOT_FOUND);
         });
 
-        lab.updateLab(request.name(), request.info(), request.contacts());
+        lab.updateLab(request.name(), request.info(), request.contacts(), request.site());
     }
+
 }

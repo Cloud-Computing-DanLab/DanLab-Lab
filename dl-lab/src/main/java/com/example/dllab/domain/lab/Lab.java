@@ -29,17 +29,19 @@ public class Lab {
     private String contacts;
 
     @Builder
-    public Lab(String name, String info, String leader, String contacts) {
+    public Lab(String name, String info, String site, String leader, String contacts) {
         this.name = name;
         this.info = info;
+        this.site = site;
         this.leader = leader;
         this.contacts = contacts;
     }
 
-    public void updateLab(String name, String info, String contacts) {
+    public void updateLab(String name, String info, String contacts, String site) {
         this.name = name;
         this.info = info;
         this.contacts = contacts;
+        this.site = site;
     }
 }
 

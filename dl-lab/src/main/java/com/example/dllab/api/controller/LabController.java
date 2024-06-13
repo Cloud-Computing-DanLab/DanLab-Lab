@@ -19,8 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class LabController {
     private final LabService labService;
-
-    // Todo: 연구실 프로필 리스트 조회(검색)
+    // 연구실 프로필 리스트 조회(검색)
     @GetMapping("/")
     public JsonResult<?> getLabInfoList(
             @RequestParam(defaultValue = "0") int page,
@@ -41,11 +40,13 @@ public class LabController {
         return JsonResult.successOf(labPage);
     }
 
+    // 연구실 프로필 상세 조회
     @GetMapping("/{labId}")
     public JsonResult<?> getLabInfo(@PathVariable(name = "labId") Long labId) {
         return JsonResult.successOf(labService.getLabInfo(labId));
     }
 
+    // 연구실 프로필 수정
     @PostMapping("/{labId}/update")
     public JsonResult<?> updateLab(@PathVariable(name = "labId") Long labId,
                                    @Valid @RequestBody UpdateLabInfoRequest request) {

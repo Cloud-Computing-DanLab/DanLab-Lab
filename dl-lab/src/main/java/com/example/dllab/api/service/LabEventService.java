@@ -1,5 +1,6 @@
 package com.example.dllab.api.service;
 
+import com.example.dllab.api.dto.CreateLabEventRequest;
 import com.example.dllab.api.dto.LabEventResponse;
 import com.example.dllab.api.dto.UpdateLabEventRequest;
 import com.example.dllab.common.exception.ExceptionMessage;
@@ -37,6 +38,20 @@ public class LabEventService {
         });
 
         return LabEventResponse.of(labEvent);
+    }
+
+    @Transactional
+    public void createLabEvent(CreateLabEventRequest request) {
+        labEventRepository.save(
+                LabEvent.builder()
+                        .labId(request.labId())
+                        .memberId(request.memberId())
+                        .title(request.title())
+                        .detail(request.detail())
+                        .category(request.category())
+                        .status(request.status())
+                        .build()
+        );
     }
 
     @Transactional

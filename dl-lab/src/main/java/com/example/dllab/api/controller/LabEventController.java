@@ -1,5 +1,6 @@
 package com.example.dllab.api.controller;
 
+import com.example.dllab.api.dto.CreateLabEventRequest;
 import com.example.dllab.api.dto.LabEventResponse;
 import com.example.dllab.api.dto.UpdateLabEventRequest;
 import com.example.dllab.api.service.LabEventService;
@@ -21,6 +22,13 @@ import org.springframework.web.bind.annotation.*;
 public class LabEventController {
     private final LabEventService labEventService;
 
+    // 연구실 글 작성
+    @PostMapping("/")
+    public JsonResult<?> createLabEvent(@Valid @RequestBody CreateLabEventRequest request) {
+        labEventService.createLabEvent(request);
+        return JsonResult.successOf("연구실 글 등록이 완료되었습니다.");
+    }
+
     // 연구실 글 리스트 조회 (전체 또는 특정 연구실)
     @GetMapping("/")
     public JsonResult<?> getLabEvents(
@@ -29,7 +37,6 @@ public class LabEventController {
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "id") String sort,
             @RequestParam(defaultValue = "DESC") String direction) {
-
         Sort sortOrder = Sort.by(Sort.Direction.fromString(direction), sort);
         Pageable pageable = PageRequest.of(page, size, sortOrder);
         Page<LabEvent> labEventPage;

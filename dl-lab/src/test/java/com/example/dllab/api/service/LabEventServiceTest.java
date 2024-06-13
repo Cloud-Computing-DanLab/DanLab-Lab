@@ -1,11 +1,13 @@
 package com.example.dllab.api.service;
 
 import com.example.dllab.IntegrationHelper;
+import com.example.dllab.api.dto.CreateLabEventRequest;
 import com.example.dllab.api.dto.LabEventResponse;
 import com.example.dllab.api.dto.UpdateLabEventRequest;
 import com.example.dllab.common.exception.ExceptionMessage;
 import com.example.dllab.common.exception.handler.LabEventException;
 import com.example.dllab.domain.event.LabEvent;
+import com.example.dllab.domain.event.constant.LabEventCategory;
 import com.example.dllab.domain.event.constant.LabEventStatus;
 import com.example.dllab.domain.event.repository.LabEventRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -91,6 +93,26 @@ class LabEventServiceTest extends IntegrationHelper {
         // when & then
         LabEventException exception = assertThrows(LabEventException.class, () -> labEventService.getLabEvent(nonExistentEventId));
         assertEquals(ExceptionMessage.LAB_EVENT_NOT_FOUND.getText(), exception.getMessage());
+    }
+
+    @Test
+    void 연구실_이벤트_생성() {
+        // given
+        CreateLabEventRequest request = new CreateLabEventRequest(1L,
+                1L,
+                "testTitle",
+                "testDetail",
+                LabEventStatus.IN_PROGRESS,
+                LabEventCategory.EVENT);
+
+        // when
+        labEventService.createLabEvent(request);
+
+        // then
+        LabEvent labEvent = labEventRepository.findByTitle("testTitle").get();
+        assertEquals(labEvent.getLabId(), 1L);
+        assertEquals(labEvent.getMemberId(), 1L);
+        assertEquals(labEvent.getStatus(), LabEventStatus.IN_PROGRESS);
     }
 
     @Test

@@ -1,6 +1,7 @@
 package com.example.dllab.api.service;
 
 import com.example.dllab.IntegrationHelper;
+import com.example.dllab.api.dto.CreateLabRequest;
 import com.example.dllab.api.dto.LabInfoResponse;
 import com.example.dllab.api.dto.UpdateLabInfoRequest;
 import com.example.dllab.common.exception.ExceptionMessage;
@@ -31,9 +32,9 @@ class LabServiceTest extends IntegrationHelper {
     @BeforeEach
     void setUp() {
         labRepository.saveAll(List.of(
-                Lab.builder().name("L1").info("Info1").leader("Leader1").contacts("Contacts1").build(),
-                Lab.builder().name("L2").info("Info2").leader("Leader2").contacts("Contacts2").build(),
-                Lab.builder().name("L3").info("Info3").leader("Leader3").contacts("Contacts3").build()
+                Lab.builder().name("L1").info("Info1").leader("Leader1").contacts("Contacts1").site("site1").build(),
+                Lab.builder().name("L2").info("Info2").leader("Leader2").contacts("Contacts2").site("site2").build(),
+                Lab.builder().name("L3").info("Info3").leader("Leader3").contacts("Contacts3").site("site3").build()
         ));
     }
 
@@ -93,10 +94,27 @@ class LabServiceTest extends IntegrationHelper {
     }
 
     @Test
+    void 연구실_프로필_등록() {
+        // given
+        CreateLabRequest request = new CreateLabRequest("newName", "newInfo", "newSite", "newLeader", "newContacts");
+
+        // when
+        labService.createLab(request);
+
+        // then
+        Lab savedLab = labRepository.findByName("newName").get();
+
+        assertEquals("newName", savedLab.getName());
+        assertEquals("newInfo", savedLab.getInfo());
+        assertEquals("newSite", savedLab.getSite());
+        assertEquals("newLeader", savedLab.getLeader());
+    }
+
+    @Test
     void 연구실_프로필_수정() {
         // given
         Lab lab = labRepository.findByName("L1").get();
-        UpdateLabInfoRequest request = new UpdateLabInfoRequest("UpdatedL1", "UpdatedInfo1", "UpdatedContacts1");
+        UpdateLabInfoRequest request = new UpdateLabInfoRequest("UpdatedL1", "UpdatedInfo1", "UpdatedContacts1", "updatedSite1");
 
         // when
         labService.updateLabInfo(lab.getId(), request);

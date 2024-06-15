@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-@RequestMapping("/lab-event")
+@RequestMapping("/lab/event")
 @RequiredArgsConstructor
 public class LabEventController {
     private final LabEventService labEventService;

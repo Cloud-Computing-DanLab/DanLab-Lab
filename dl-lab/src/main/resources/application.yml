@@ -10,7 +10,7 @@ spring:
 
   datasource:
     driver-class-name:
-    url: jdbc:postgresql://localhost:5432/danlab?serverTimezone=Asia/Seoul
+    url: jdbc:postgresql://postgres:5432/danlab?serverTimezone=Asia/Seoul
     username: jus
     password: 1234
 

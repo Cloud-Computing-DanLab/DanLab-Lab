@@ -1,0 +1,15 @@
+- hosts: all
+  #   become: true
+
+  tasks:
+    - name: create a docker image with deployed jar file
+      command: docker build -t leejusung/lab-server .
+      args:
+        chdir: /root/dl-lab
+
+    - name: push the image on Docker Hub
+      command: docker push leejusung/lab-server
+
+    - name: remove the docker image from the ansible server
+      command: docker rmi leejusung/lab-server
+      ignore_errors: yes

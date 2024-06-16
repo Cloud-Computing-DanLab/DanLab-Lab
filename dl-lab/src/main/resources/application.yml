@@ -1,4 +1,3 @@
-
 server:
   port: 8080
 
@@ -9,24 +8,21 @@ spring:
     active: local
 
   datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://lab-postgres:5432/danlab?serverTimezone=Asia/Seoul
-    username: jus
-    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://mysql-service:3306/jwt_security?serverTimezone=Asia/Seoul&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: hks13579
 
   jpa:
     properties:
       hibernate:
         ddl-auto: update
 
-
 ---
 spring.config.activate.on-profile: local
 
-
 ---
 spring.config.activate.on-profile: test
-
 
 ---
 spring.config.activate.on-profile: prod

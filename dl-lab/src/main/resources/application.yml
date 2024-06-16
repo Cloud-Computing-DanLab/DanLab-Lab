@@ -1,0 +1,30 @@
+
+server:
+  port: 8088
+
+spring:
+  application:
+    name: dl-lab
+  profiles:
+    active: local
+
+  datasource:
+    driver-class-name:
+    url: jdbc:postgresql://localhost:5432/danlab?serverTimezone=Asia/Seoul
+    username: jus
+    password: 1234
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+---
+spring.config.activate.on-profile: local
+
+
+---
+spring.config.activate.on-profile: test
+
+
+---
+spring.config.activate.on-profile: prod
